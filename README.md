@@ -1,7 +1,21 @@
 # py-auger 
-This is a framework for simulating an XFEL experiment that intends to make direct time resolved measurments of atomic auger decays or other electron emission events
+This is a framework for simulating an XFEL experiment that intends to make direct time resolved measurments of atomic auger decays or other electron emission events.
+This code is a work in progress....obviously
 
-# Requirements:
+## Experiment Concept (in pictures only)
+
+![Experiment Concept](https://raw.github.com/chrisroedig/py-auger/master/info/auger-exp-concept.png)
+
+## Simulation Block Diagram
+
+![Sim Diagram](https://raw.github.com/chrisroedig/py-auger/master/info/sim-diagram.png)
+
+## Example Results
+
+![Jitter Results](https://raw.github.com/chrisroedig/py-auger/master/info/sim-jitter-dtime.png)
+![Reconstruction Results](https://raw.github.com/chrisroedig/py-auger/master/info/sim-comp.png)
+
+## Requirements:
 
 Most of the dependencies are met by installing a python environment geared towards technical computing. The pip system (python package manager) allows easy installation of these depedencies as well.
 
@@ -12,9 +26,9 @@ Most of the dependencies are met by installing a python environment geared towar
 * pyyaml
 
 
-# Usage :
+## Usage :
 
-## direct terminal exec:
+### direct terminal exec:
 
 * assuming a *NIX setup here (macOS, linux etc.)
 * make sure sim.py is executable `chmod +x sim.py`
@@ -23,7 +37,7 @@ Most of the dependencies are met by installing a python environment geared towar
 * to run the sim with a desired settings file `./sim.py -s my_config.yaml`
 * to interrupt a running simulation hit `ctrl-c`, you'll get a chance to resume or shut down the simulation
 
-## module import
+### module import
 
 You can import sim.py in the python shell and operate it from there. This might be nice for wrapping automation around it, especially once data saving is implemented (in a couple days).
 
@@ -34,7 +48,7 @@ You can import sim.py in the python shell and operate it from there. This might 
 
 
 
-# Configuration
+## Configuration
 
 The simulation conditions are defined in the .yaml files. 
 I've inlcuded examples for:
@@ -44,7 +58,7 @@ I've inlcuded examples for:
 
 the config files are conmented to explain the values.
 
-# Analysis:
+## Analysis:
 
 The simulation reduces data as the experiment would and feeds a limited set of event data and enviroment values to the analyzer. The idea is to test certain analysis routines.
 The analyzer to use is called out in the config file. The simulation will attempt to load a module by that name. If the analyzer is not defined, it will load the analyzer base class which does nothing.
