@@ -12,7 +12,10 @@ This code is a work in progress....obviously
 
 ## Example Results
 
+### Comparing Various Decay Times
 ![Jitter Results](https://raw.github.com/chrisroedig/py-auger/master/info/sim-jitter-dtime.png)
+
+### Comparing Theory, Scanned Simualtion and Jittered Simulation
 ![Reconstruction Results](https://raw.github.com/chrisroedig/py-auger/master/info/sim-comp.png)
 
 ## Requirements:
