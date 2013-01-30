@@ -1,0 +1,58 @@
+---
+#descriptive name of this run 
+name: "neon_jitter"
+
+# which analyzer to use
+analyzer: "ana_1"
+
+shots: 100000 #total shots to simulate, this gets ignored when scan is defined
+
+atom : #atomic system properties
+ primary_binding_energy : 870.0 # in eV
+ primary_hits : 10 # per shot
+ auger_energy : 804.0 # in eV
+ auger_decay_time : 2.7 # in fs
+ auger_energy_width : 0.25 # in eV
+ auger_hits : 5 # per shot
+
+xfel_pulse : #XFEL pulse properties
+ central_photon_energy : 1600.0 # eV
+ photon_energy_bandwidth : 8.0 # eV
+ main_pulse_duration : 1.0 # fs
+ plateau_duration : 200.0 # fs
+ plateau_ratio : .001 #
+
+ir_pulse : #infrared pulse properties
+ wavelength : 4.0 # in microns
+ duration : 100 # in fs
+ pondermotive : .1 # peak Up in eV
+
+#scan : #scan parameters, (comment it out if you don't want to scan)
+# delay_start : -100.0 # fs
+# delay_end : 100.0 # fs
+# delay_step : 1.0 # fs
+# shots_per_step : 100 #
+
+jitter : #shot-to-shot jitter 
+ timing : 250 # xfel/ir timing jitter
+ ir_up : 0.01 # UP jitter of ir pulse 1.0 -> 100%
+ photon_energy : 16.0 #amplitude of shot to shot photon energy jitter
+
+data : # for binning during analysis
+ auger_min : 750
+ auger_max : 850
+ auger_bins : 200
+ primary_min : 680
+ primary_max : 780
+ primary_bins : 200
+ streak_min : -20
+ streak_max : 20
+ streak_bins : 80
+ 
+ 
+
+
+
+
+
+
