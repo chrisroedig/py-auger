@@ -10,10 +10,12 @@ shots: 100000 #total shots to simulate, this gets ignored when scan is defined
 atom : #atomic system properties
  primary_binding_energy : 870.0 # in eV
  primary_hits : 10 # per shot
+ primary_full_angle : 15.0 # in deg, full angle integration of primary electron 
  auger_energy : 804.0 # in eV
  auger_decay_time : 2.7 # in fs
  auger_energy_width : 0.25 # in eV
  auger_hits : 5 # per shot
+ auger_full_angle: 2.0 # in deg,full angle integration of primary electron 
 
 xfel_pulse : #XFEL pulse properties
  central_photon_energy : 1600.0 # eV
@@ -25,7 +27,8 @@ xfel_pulse : #XFEL pulse properties
 ir_pulse : #infrared pulse properties
  wavelength : 4.0 # in microns
  duration : 100 # in fs
- pondermotive : .1 # peak Up in eV
+ up : 1.0 # peak Up in eV
+ up_variance : .1 # eV, amount of up variance based in spatial mode properties
 
 #scan : #scan parameters, (comment it out if you don't want to scan)
 # delay_start : -100.0 # fs

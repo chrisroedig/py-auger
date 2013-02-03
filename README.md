@@ -45,10 +45,9 @@ Most of the dependencies are met by installing a python environment geared towar
 You can import sim.py in the python shell and operate it from there. This might be nice for wrapping automation around it, especially once data saving is implemented (in a couple days).
 
 * import the main sim module `import sim`
-* run the init to load your config `my_config = sim.init('my_config.yaml')`
-* create the shot list   `shots = build_shot_params( my_config )`
-* create the hit jitter functions `sim( config, shots, hits )`
-
+* instantiate the simulation `sim_engine = py_auger_engine()`
+* load your configuration `sim_engine.setup( 'configfile.yaml' )` (omit argument to load default config)
+* run the simulation `sim_engine.sim()`
 
 
 ## Configuration

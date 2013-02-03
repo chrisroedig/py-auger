@@ -119,6 +119,13 @@ class analyzer(analyzer):
 			self.afterRun()
 		return
 	def check(self):
+		self.plot_maps()
+		self.plot_lineouts()
+
+
+		return
+
+	def plot_maps(self):
 		#normailize the data by row
 		norm_primary = np.transpose(self.primary_data_hist)
 		norm_primary = norm_primary/np.sum(norm_primary,0)
@@ -130,25 +137,13 @@ class analyzer(analyzer):
 		norm_auger = np.transpose(norm_auger)
 		auger_max = np.mean(norm_auger)+3*np.std(norm_auger)
 		
-		# lower half of auger data
-		auger_lineout_count= np.floor(np.shape(norm_auger)[0]/2.0)
-		# width of each lineout when making 4 lineouts
-		auger_lineout_width = np.floor(auger_lineout_count/4.0)
-		# 
-		
-		auger_lineouts =[
-			np.sum(norm_auger[0*auger_lineout_width:1*auger_lineout_width],0),
-			np.sum(norm_auger[1*auger_lineout_width:2*auger_lineout_width],0),
-			np.sum(norm_auger[2*auger_lineout_width:3*auger_lineout_width],0),
-			np.sum(norm_auger[3*auger_lineout_width:4*auger_lineout_width],0),
-		]
 
-		fig=plt.figure(2)
+		fig = plt.figure(2)
 		fig.subplots_adjust(hspace=.5)
 		plt.clf()
 		
 
-		plt.subplot2grid((3,1),(0,0))
+		plt.subplot2grid((2,1),(0,0))
 		plt.imshow(
 			norm_primary,
 			extent = (
@@ -161,9 +156,12 @@ class analyzer(analyzer):
 			aspect='auto'
 			)
 		plt.title('Sorted Primary')
-		
+		plt.xlabel('Photoelectron Energy [ eV ]')
+		plt.ylabel('Detected Streak [ eV ] ')
 
-		plt.subplot2grid((3,1),(1,0))
+
+
+		plt.subplot2grid((2,1),(1,0))
 		plt.imshow(
 			norm_auger,
 			extent = (
@@ -176,23 +174,46 @@ class analyzer(analyzer):
 			aspect='auto'
 			)
 		plt.title('Sorted Auger')
-			
-		plt.subplot2grid((3,1),(2,0))
-		plt.plot(self.auger_axis[:-1], auger_lineouts[0],lw=2)
-		plt.plot(self.auger_axis[:-1], auger_lineouts[1],lw=2)
-		plt.plot(self.auger_axis[:-1], auger_lineouts[2],lw=2)
-		plt.plot(self.auger_axis[:-1], auger_lineouts[3],lw=2)
-		plt.title('Sorted Auger Lineouts')
-		plt.legend([
-			str(self.streak_axis[0*auger_lineout_width])+" eV",
-			str(self.streak_axis[1*auger_lineout_width])+" eV",
-			str(self.streak_axis[2*auger_lineout_width])+" eV",
-			str(self.streak_axis[3*auger_lineout_width])+" eV",
-			])
-
+		plt.xlabel('Photoelectron Energy [ eV ]')
+		plt.ylabel('Detected Streak [ eV ]')
 
 		plt.draw()
-		
-		
+		return
 
-		pass
+	def plot_lineouts(self):
+		# lower half of auger data
+		auger_lineout_count= np.floor(np.shape(self.auger_data_hist)[0]/2.0)
+		# width of each lineout when making 4 lineouts
+		auger_lineout_width = np.floor(auger_lineout_count/4.0)
+		# 
+		
+		auger_lineouts =[
+			np.sum( self.auger_data_hist[ -1*auger_lineout_width : -1 										],0 ),
+			np.sum( self.auger_data_hist[ -2*auger_lineout_width : -1*auger_lineout_width ],0 ),
+			np.sum( self.auger_data_hist[ -3*auger_lineout_width : -2*auger_lineout_width ],0 ),
+			np.sum( self.auger_data_hist[ -4*auger_lineout_width : -0*auger_lineout_width ],0 ),
+		]
+
+
+		fig = plt.figure(3)
+		
+		plt.clf()
+
+		
+		plt.plot(self.auger_axis[:-1], auger_lineouts[3],lw=1)
+		plt.plot(self.auger_axis[:-1], auger_lineouts[2],lw=1)
+		plt.plot(self.auger_axis[:-1], auger_lineouts[1],lw=1)
+		plt.plot(self.auger_axis[:-1], auger_lineouts[0],lw=2, c='black')
+		plt.title('Sorted Auger Lineouts')
+		plt.xlabel('Photoelectron Energy [ eV ]')
+		plt.ylabel('Counts')
+
+		plt.legend([
+			str(self.streak_axis[-3*auger_lineout_width])+" eV",
+			str(self.streak_axis[-2*auger_lineout_width])+" eV",
+			str(self.streak_axis[-1*auger_lineout_width])+" eV",
+			str(self.streak_axis[-1])+" eV",
+			])
+		plt.draw()
+
+		return
