@@ -594,6 +594,8 @@ class py_auger_engine():
 ##-----------------------------------------------------------------------------
 ##this happens on load
 if __name__ == "__main__":
+
+	# parse Options from yaml file
 	parser = OptionParser()
 
 	parser.add_option("-s", "--settings", dest="settings",
